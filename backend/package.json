@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "../../../Downloads/ra16-homeworks-master/lifecycle-http/crud/backend/node_modules/.bin/forever server.js",
+    "watch": "../../../Downloads/ra16-homeworks-master/lifecycle-http/crud/backend/node_modules/.bin/forever -w server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "forever": "^1.0.0",
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "koa2-cors": "^2.0.6"
+  }
+}
