@@ -18,13 +18,18 @@ router.get('/notes', async (ctx, next) => {
     ctx.response.body = notes;
 });
 
-router.post('/notes', async(ctx, next) => {
+router.get('/note', async (ctx, next) => { // Получаем данные через GET параметры
+    const query = ctx.request.query
+    ctx.response.body = notes[query.id];
+});
+
+router.post('/notes', async(ctx, next) => { // Получаем данные через тело запроса
     const newNote = {...ctx.request.body, id: nextId++}
     notes.push(newNote);
     ctx.response.body = newNote;
 });
 
-router.delete('/notes/:id', async(ctx, next) => {
+router.delete('/notes/:id', async(ctx, next) => { // Получаем данные через URL параметры
     const noteId = Number(ctx.params.id);
     const index = notes.findIndex(o => o.id === noteId);
     if (index !== -1) {

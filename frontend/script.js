@@ -2,8 +2,34 @@ const textarea = document.querySelector('textarea')
 const btn = document.querySelector('button')
 const list = document.querySelector('ul')
 
-const addNewNote = (newNote) => {
+const getAllData = () => {
+  list.innerHTML = ''
+  const requestOptions = {
+    method: 'GET'
+  };
+
+  fetch("http://localhost:7777/notes", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      result.forEach((item) => {
+        console.log(item.id)
+        addNewNote(item.content, item.id)
+      })
+
+    })
+    .catch(error => console.log('error', error));
+}
+
+const removeNote = (noteId) => {
+
+  fetch("http://localhost:7777/notes/" + noteId, {method: 'DELETE'})
+    .then(() => getAllData())
+    .catch(error => console.log('error', error));
+}
+
+const addNewNote = (newNote, id) => {
   const li = document.createElement('li')
+  li.addEventListener('click', () => removeNote(id))
   li.append(newNote)
   list.append(li)
 }
@@ -37,33 +63,12 @@ btn.addEventListener('click', () => {
   fetch("http://localhost:7777/notes", requestOptions)
     .then(response => response.json())
     .then(result => {
-      addNewNote(result.content)
+      addNewNote(result.content, result.id)
     })
     .catch(error => console.log('error', error));
 
 })
-
-console.log('before DOMContentLoaded')
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  const requestOptions = {
-    method: 'GET'
-  };
-
-  fetch("http://localhost:7777/notes", requestOptions)
-    .then(response => response.json())
-    .then(result => {
-      console.log('inside fetch')
-      result.forEach((item) => {
-        addNewNote(item.content)
-      })
-
-    })
-    .catch(error => console.log('error', error));
-
-
-  console.log('outside fetch')
+  getAllData()
 })
-
-console.log('after DOMContentLoaded')

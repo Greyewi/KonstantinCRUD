@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "../../../Downloads/ra16-homeworks-master/lifecycle-http/crud/backend/node_modules/.bin/forever server.js",
-    "watch": "../../../Downloads/ra16-homeworks-master/lifecycle-http/crud/backend/node_modules/.bin/forever -w server.js"
+    "start": "./node_modules/.bin/forever server.js",
+    "watch": "./node_modules/.bin/forever -w server.js"
   },
   "keywords": [],
   "author": "",
